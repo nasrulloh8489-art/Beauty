@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Админ-панель салона</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💆‍♀️</text></svg>">
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+  <!-- Вход -->
+  <section id="login" class="login" hidden>
+    <form id="loginForm" class="card login-card">
+      <div class="logo">💆‍♀️</div>
+      <h1>Админ-панель салона</h1>
+      <p class="muted">Введите пароль администратора</p>
+      <input id="password" type="password" placeholder="Пароль" autocomplete="current-password" required>
+      <button class="btn primary" type="submit">Войти</button>
+      <p id="loginError" class="error" hidden></p>
+    </form>
+  </section>
+
+  <!-- Панель -->
+  <div id="app" hidden>
+    <header class="topbar">
+      <div class="brand"><span>💆‍♀️</span> <b id="salonTitle">Салон</b></div>
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-tab="requests">Заявки <span id="newCount" class="badge" hidden></span></button>
+        <button class="tab" data-tab="specialists">Специалисты</button>
+        <button class="tab" data-tab="services">Услуги</button>
+        <button class="tab" data-tab="settings">Настройки</button>
+      </nav>
+      <button id="logout" class="btn ghost small">Выйти</button>
+    </header>
+
+    <main>
+      <section id="tab-requests" class="panel">
+        <div class="panel-head">
+          <h2>Заявки клиентов</h2>
+          <button id="refresh" class="btn ghost small">Обновить</button>
+        </div>
+        <div id="filters" class="chips"></div>
+        <div id="requests" class="list"></div>
+      </section>
+
+      <section id="tab-specialists" class="panel" hidden>
+        <div class="panel-head">
+          <h2>Специалисты</h2>
+          <div class="actions">
+            <button id="addSpecialist" class="btn ghost small">+ Добавить</button>
+            <button id="saveSpecialists" class="btn primary small">Сохранить</button>
+          </div>
+        </div>
+        <p class="muted">Бот называет клиенту специалиста, который выполняет выбранную услугу.</p>
+        <div id="specialists" class="list"></div>
+      </section>
+
+      <section id="tab-services" class="panel" hidden>
+        <div class="panel-head">
+          <h2>Услуги и цены</h2>
+          <div class="actions">
+            <button id="addService" class="btn ghost small">+ Добавить</button>
+            <button id="saveServices" class="btn primary small">Сохранить</button>
+          </div>
+        </div>
+        <p class="muted">Бот предлагает клиентам только активные услуги и называет цену «от …».</p>
+        <div id="services" class="list"></div>
+      </section>
+
+      <section id="tab-settings" class="panel" hidden>
+        <div class="panel-head"><h2>Настройки</h2></div>
+        <form id="settingsForm" class="card form-grid">
+          <label>Название салона <input name="salonName" required></label>
+          <label>Валюта <input name="currency" placeholder="₽"></label>
+          <label>Адрес <input name="address" placeholder="ул. Примерная, 1"></label>
+          <label>Часы работы <input name="hours"></label>
+          <label class="wide">ID чата для уведомлений о заявках
+            <input name="adminChatId" placeholder="Отправьте боту команду /id и вставьте число сюда">
+          </label>
+          <label class="wide">Дополнительная информация для бота
+            <textarea name="extraInfo" rows="3"></textarea>
+          </label>
+          <div class="wide actions"><button class="btn primary" type="submit">Сохранить настройки</button></div>
+        </form>
+
+        <div class="card">
+          <h3>Telegram-бот</h3>
+          <div id="botInfo" class="muted">Загрузка…</div>
+          <div class="actions">
+            <button id="setupBot" class="btn primary small">Подключить бота к сайту</button>
+            <button id="testBot" class="btn ghost small">Тестовое уведомление</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+  <script src="/admin.js"></script>
+</body>
+</html>

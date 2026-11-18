@@ -1,0 +1,14 @@
+{
+  "name": "beauty-bot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "netlify dev",
+    "poll": "node --env-file=.env scripts/poll.mjs"
+  },
+  "dependencies": {
+    "@google/genai": "^3.3.0",
+    "@netlify/blobs": "^11.1.9"
+  }
+}
